@@ -1,0 +1,68 @@
+# AI Vision Monitoring System Configuration
+
+app_name: "AI Vision Monitor"
+debug: false
+demo_mode: true
+
+# Performance
+target_fps: 30
+max_latency_ms: 150
+max_memory_gb: 4.0
+
+# Paths
+data_dir: "data"
+models_dir: "models"
+logs_dir: "data/logs"
+clips_dir: "data/clips"
+events_dir: "data/events"
+
+# Camera configuration
+cameras:
+  - id: 0
+    name: "Main Camera"
+    source: "0"
+    width: 1280
+    height: 720
+    fps: 30
+    enabled: true
+
+# Audio configuration
+audio:
+  sample_rate: 16000
+  chunk_size: 1024
+  channels: 1
+  device_index: null
+  vad_mode: 2
+  noise_suppression: true
+
+# Alert configuration
+alerts:
+  email_enabled: false
+  email_smtp_server: ""
+  email_smtp_port: 587
+  email_sender: ""
+  email_recipients: []
+  sms_enabled: false
+  desktop_enabled: true
+  sound_enabled: true
+
+# Anomaly detection
+anomaly:
+  motion_threshold: 0.3
+  anomaly_threshold: 0.75
+  motion_weight: 0.4
+  mask_change_weight: 0.3
+  object_change_weight: 0.3
+  scream_threshold: 0.85
+  glass_break_threshold: 0.80
+  gunshot_threshold: 0.90
+  door_slam_threshold: 0.75
+  speech_threshold: 0.60
+
+# AI configuration
+ai:
+  openai_api_key: ""  # Set via OPENAI_API_KEY env var
+  openai_model: "gpt-4o-mini"
+  scene_summary_interval: 30
+  sam_model_type: "vit_b"
+  use_gpu: true

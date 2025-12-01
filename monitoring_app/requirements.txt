@@ -1,0 +1,52 @@
+# AI Vision Monitoring System - Dependencies
+# Python 3.9+ required
+
+# Web Framework
+streamlit==1.38.0
+
+# Computer Vision
+opencv-python==4.10.0.84
+numpy>=1.24.0
+
+# Deep Learning
+torch>=2.4.0
+torchvision>=0.19.0
+
+# SAM 3 Integration (comment out if not using)
+# sam3vision @ git+https://github.com/irfan0807/sam3Vision.git@main
+
+# Audio Processing
+pyaudio==0.2.14
+librosa==0.10.2
+soundfile>=0.12.1
+webrtcvad==2.0.10
+pydub==0.25.1
+
+# Machine Learning
+scikit-learn==1.5.1
+scipy>=1.11.0
+
+# Visualization
+plotly>=5.18.0
+matplotlib>=3.8.0
+
+# AI Integration
+openai==1.51.0
+
+# Notifications
+twilio==9.3.0
+
+# Utilities
+pyyaml>=6.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Development
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=24.0.0
+flake8>=7.0.0
+mypy>=1.8.0
+
+# Optional: Windows notifications
+# win10toast>=0.9 ; sys_platform == 'win32'

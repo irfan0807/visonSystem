@@ -1,0 +1,155 @@
+/* AI Vision Monitoring System - Custom Styles */
+
+:root {
+    --primary-color: #ff4b4b;
+    --secondary-color: #262730;
+    --background-color: #0e1117;
+    --text-color: #fafafa;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+/* Main container styles */
+.metric-card {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+/* Alert severity colors */
+.alert-critical {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+.alert-high {
+    color: #ff8800;
+    font-weight: bold;
+}
+
+.alert-medium {
+    color: var(--warning-color);
+}
+
+.alert-low {
+    color: var(--success-color);
+}
+
+/* Status indicators */
+.status-active {
+    color: var(--success-color);
+}
+
+.status-inactive {
+    color: var(--danger-color);
+}
+
+/* Video feed container */
+.video-feed {
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Live indicator */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.live-indicator::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Event timeline */
+.event-item {
+    padding: 10px 15px;
+    border-left: 3px solid #333;
+    margin-bottom: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.event-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.event-item.critical {
+    border-left-color: var(--danger-color);
+}
+
+.event-item.high {
+    border-left-color: #ff8800;
+}
+
+.event-item.medium {
+    border-left-color: var(--warning-color);
+}
+
+.event-item.low {
+    border-left-color: var(--success-color);
+}
+
+/* Dashboard metrics */
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Gauge chart colors */
+.gauge-low {
+    color: var(--success-color);
+}
+
+.gauge-medium {
+    color: var(--warning-color);
+}
+
+.gauge-high {
+    color: var(--danger-color);
+}
+
+/* Audio waveform */
+.waveform-container {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .metric-card {
+        padding: 15px;
+    }
+    
+    .metric-value {
+        font-size: 1.8rem;
+    }
+}
