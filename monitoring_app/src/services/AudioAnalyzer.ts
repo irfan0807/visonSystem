@@ -343,17 +343,22 @@ export class AudioAnalyzer {
 
   /**
    * Convert Float32Array to base64 for API transmission
+   * Uses chunked processing for better performance with large buffers
    */
   private float32ToBase64(float32Array: Float32Array): string {
-    const buffer = new ArrayBuffer(float32Array.length * 4);
-    const view = new Float32Array(buffer);
-    view.set(float32Array);
-    const bytes = new Uint8Array(buffer);
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) {
-      binary += String.fromCharCode(bytes[i]);
+    const buffer = float32Array.buffer;
+    const bytes = new Uint8Array(buffer, float32Array.byteOffset, float32Array.byteLength);
+    
+    // Process in chunks for better performance
+    const chunkSize = 8192;
+    const chunks: string[] = [];
+    
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      const chunk = bytes.subarray(i, Math.min(i + chunkSize, bytes.length));
+      chunks.push(String.fromCharCode.apply(null, Array.from(chunk)));
     }
-    return btoa(binary);
+    
+    return btoa(chunks.join(''));
   }
 
   /**

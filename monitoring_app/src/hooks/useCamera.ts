@@ -118,6 +118,24 @@ export function useCamera(): UseCameraReturn {
 
   /**
    * Capture a single frame
+   * 
+   * NOTE: This is a placeholder implementation for demonstration purposes.
+   * For production deployment, integrate with expo-camera or react-native-vision-camera:
+   * 
+   * Example with expo-camera:
+   * ```
+   * const photo = await cameraRef.current?.takePictureAsync({
+   *   base64: true,
+   *   quality: VIDEO_CONFIG.jpegQuality,
+   * });
+   * return photo?.base64 || null;
+   * ```
+   * 
+   * Example with react-native-vision-camera:
+   * ```
+   * const photo = await camera.current?.takePhoto();
+   * return await RNFS.readFile(photo.path, 'base64');
+   * ```
    */
   const captureFrame = useCallback(async (): Promise<string | null> => {
     if (!isReady || !currentCamera) {
@@ -125,14 +143,10 @@ export function useCamera(): UseCameraReturn {
     }
 
     try {
-      // In a real implementation, this would capture from expo-camera
-      // const photo = await cameraRef.current?.takePictureAsync({
-      //   base64: true,
-      //   quality: VIDEO_CONFIG.jpegQuality,
-      // });
-      // return photo?.base64 || null;
+      // TODO: Replace with actual camera capture for production
+      // See function documentation for implementation examples
       
-      // Return placeholder for demo
+      // Placeholder for demo - returns mock frame data
       return 'placeholder_frame_data';
     } catch (error) {
       console.error('[useCamera] Frame capture failed:', error);

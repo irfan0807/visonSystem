@@ -234,13 +234,26 @@ export class AnomalyDetector {
 
   /**
    * Calculate motion score (simplified)
+   * 
+   * NOTE: This is a placeholder implementation for demonstration purposes.
+   * For production use, replace with actual frame comparison logic such as:
+   * - Pixel difference calculation between frames
+   * - Optical flow analysis
+   * - Background subtraction techniques
+   * - Computer vision libraries like OpenCV
    */
   private calculateMotionScore(frame: ProcessedFrame): number {
-    // In a real implementation, this would compare pixel differences
+    // TODO: Replace with actual frame comparison for production
+    // Example production implementation would:
+    // 1. Decode frame.data from base64
+    // 2. Compare pixel values with previous frame
+    // 3. Calculate mean absolute difference or SSIM
+    
     // Simulated motion score based on timestamp variation
     const timeDelta = frame.timestamp - (this.motionState.previousFrame?.timestamp || 0);
     const normalizedDelta = Math.min(timeDelta / 100, 1);
-    return Math.random() * 0.3 * normalizedDelta; // Simulated
+    // Simulated value - replace with actual motion calculation
+    return Math.random() * 0.3 * normalizedDelta;
   }
 
   /**
