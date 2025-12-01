@@ -1,0 +1,112 @@
+# AI Vision Monitoring System - Git Ignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# mypy
+.mypy_cache/
+
+# Data and logs (keep directories, ignore contents)
+data/events/*
+data/clips/*
+data/logs/*
+!data/events/.gitkeep
+!data/clips/.gitkeep
+!data/logs/.gitkeep
+
+# Models (large files)
+models/*.pth
+models/*.pt
+models/*.pkl
+models/*.onnx
+!models/.gitkeep
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+tmp/
+temp/
+
+# Logs
+*.log
+logs/
+
+# Build artifacts
+*.o
+*.a
+*.dll
+*.dylib
+
+# Docker
+.docker/
+
+# Secrets and credentials
+secrets/
+credentials/
+*.pem
+*.key

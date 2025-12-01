@@ -1,0 +1,58 @@
+# AI Vision Monitoring System - Docker Compose Configuration
+
+version: '3.8'
+
+services:
+  monitoring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: ai-vision-monitor
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - TWILIO_SID=${TWILIO_SID:-}
+      - TWILIO_TOKEN=${TWILIO_TOKEN:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./config.yaml:/app/config.yaml:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Uncomment for GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Development service with hot reload
+  monitoring-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: ai-vision-monitor-dev
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    profiles:
+      - dev
+
+volumes:
+  data:
+  models:
