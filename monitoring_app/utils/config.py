@@ -112,7 +112,7 @@ class Config:
     @classmethod
     def from_yaml(cls, config_path: str) -> 'Config':
         """Load configuration from a YAML file."""
-        with open(config_path, 'r') as f:
+        with open(config_path, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)
         return cls.from_dict(data)
     
@@ -239,7 +239,7 @@ class Config:
     
     def save_yaml(self, config_path: str) -> None:
         """Save configuration to a YAML file."""
-        with open(config_path, 'w') as f:
+        with open(config_path, 'w', encoding='utf-8') as f:
             yaml.dump(self.to_dict(), f, default_flow_style=False)
     
     def ensure_directories(self) -> None:

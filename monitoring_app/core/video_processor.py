@@ -602,13 +602,30 @@ class VideoProcessor:
             if not frames_to_save:
                 return None
             
-            # Create video writer
+            # Create video writer with fallback codecs
             first_frame = frames_to_save[0][0]
             height, width = first_frame.shape[:2]
-            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-            writer = cv2.VideoWriter(
-                str(output_path), fourcc, self.target_fps, (width, height)
-            )
+            
+            # Try multiple codecs for cross-platform compatibility
+            codecs = ['mp4v', 'avc1', 'XVID', 'MJPG']
+            writer = None
+            
+            for codec in codecs:
+                try:
+                    fourcc = cv2.VideoWriter_fourcc(*codec)
+                    writer = cv2.VideoWriter(
+                        str(output_path), fourcc, self.target_fps, (width, height)
+                    )
+                    if writer.isOpened():
+                        break
+                    writer.release()
+                    writer = None
+                except Exception:
+                    continue
+            
+            if writer is None or not writer.isOpened():
+                self.logger.error("No suitable video codec found")
+                return None
             
             for frame, _ in frames_to_save:
                 writer.write(frame)

@@ -656,9 +656,11 @@ def main():
     st.markdown("---")
     render_alert_history()
     
-    # Auto-refresh
+    # Auto-refresh using Streamlit's built-in mechanism
+    # Use st.empty with a placeholder for more efficient updates
     if st.session_state.running:
-        time.sleep(0.1)
+        # Refresh every 1 second instead of 0.1s to reduce CPU usage
+        time.sleep(1.0)
         st.rerun()
 
 

@@ -57,7 +57,7 @@ const MonitoringApp = {
         });
     },
 
-    // Play alert sound
+    // Play alert sound with error handling
     playAlertSound: function(severity = 'medium') {
         const sounds = {
             critical: 'alert-critical.mp3',
@@ -66,9 +66,17 @@ const MonitoringApp = {
             low: 'alert-low.mp3'
         };
         
-        const audio = new Audio(`/static/sounds/${sounds[severity] || sounds.medium}`);
+        const soundFile = sounds[severity] || sounds.medium;
+        const audio = new Audio(`/static/sounds/${soundFile}`);
         audio.volume = 0.5;
-        audio.play().catch(e => console.log('Audio play failed:', e));
+        
+        // Handle missing audio files gracefully
+        audio.play().catch(e => {
+            // Silently fail if audio file doesn't exist - this is expected in development
+            if (e.name !== 'NotSupportedError' && e.name !== 'NotFoundError') {
+                console.log('Audio play failed:', e);
+            }
+        });
     },
 
     // Show browser notification

@@ -4,6 +4,7 @@ Supports email, SMS (Twilio), and desktop notifications.
 """
 
 import os
+import re
 import smtplib
 import threading
 import time
@@ -290,11 +291,22 @@ class AlertManager:
         if not self.email_recipients:
             return
         
+        # Validate email addresses to prevent header injection
+        email_pattern = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+        valid_recipients = [
+            email for email in self.email_recipients 
+            if email_pattern.match(email)
+        ]
+        
+        if not valid_recipients:
+            self.logger.warning("No valid email recipients found")
+            return
+        
         try:
             msg = MIMEMultipart('alternative')
             msg['Subject'] = f"[{alert.severity.upper()}] {alert.alert_type} Alert - AI Vision Monitor"
             msg['From'] = self.email_sender
-            msg['To'] = ', '.join(self.email_recipients)
+            msg['To'] = ', '.join(valid_recipients)
             
             # HTML content
             html = self._generate_email_html(alert)

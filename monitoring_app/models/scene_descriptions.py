@@ -235,14 +235,15 @@ Format: One clear sentence describing the main scene, followed by bullet points 
             
             messages.append({"role": "user", "content": user_content})
             
-            # Call API
+            # Call API with timeout for production reliability
             self.stats['api_calls'] += 1
             
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 max_tokens=200,
-                temperature=0.3
+                temperature=0.3,
+                timeout=30.0  # 30 second timeout
             )
             
             description = response.choices[0].message.content

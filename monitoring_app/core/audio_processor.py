@@ -324,8 +324,9 @@ class AudioProcessor:
             return True
         
         try:
-            # Convert to 16-bit PCM
-            pcm = (samples * 32768).astype(np.int16).tobytes()
+            # Clamp samples to valid range and convert to 16-bit PCM
+            clamped = np.clip(samples, -1.0, 1.0)
+            pcm = (clamped * 32767).astype(np.int16).tobytes()
             
             # WebRTC VAD requires specific frame sizes
             frame_duration = 30  # ms
